@@ -10,13 +10,13 @@
 #include "parse.h"
 
 
-int create_db_header(int fd, struct dbHeader_t **headerOut){
+int create_db_header(int fd, struct dbheader_t **headerOut){
 	if(fd < 0){
 		printf("File Descriptor");
 		return STATUS_ERROR;
 	}
 
-	struct dbHeader_t *header = calloc(1, sizeof(struct dbHeader_t));
+	struct dbheader_t *header = calloc(1, sizeof(struct dbheader_t));
 	
 	if(header == NULL){
 		printf("Calloc error\n");
@@ -26,7 +26,7 @@ int create_db_header(int fd, struct dbHeader_t **headerOut){
 	header->version = 0x1;
 	header->count = 0;
 	header->magic = HEADER_MAGIC;
-	header->filesize = sizeof(struct dbHeader_t);
+	header->filesize = sizeof(struct dbheader_t);
 
 	*headerOut = header;
 
@@ -34,21 +34,21 @@ int create_db_header(int fd, struct dbHeader_t **headerOut){
 
 }
 
-int validate_db_header(int fd, struct dbHeader_t **headerOut){
+int validate_db_header(int fd, struct dbheader_t **headerOut){
 
 	if(fd < 0){
 		printf("Bad FD\n");
 		return STATUS_ERROR;
 	}
 
-	struct dbHeader_t *header = calloc(1, sizeof(struct dbHeader_t));
+	struct dbheader_t *header = calloc(1, sizeof(struct dbheader_t));
 
 	if(header == NULL){
 		printf("Calloc error\n");
 		return STATUS_ERROR;
 	}
 
-	if(read(fd, header, sizeof(struct dbHeader_t)) != sizeof(struct dbHeader_t)){
+	if(read(fd, header, sizeof(struct dbheader_t)) != sizeof(struct dbheader_t)){
 		perror("Read");
 		free(header);
 		return STATUS_ERROR;
@@ -85,7 +85,7 @@ int validate_db_header(int fd, struct dbHeader_t **headerOut){
 	return STATUS_SUCCESSFUL;
 }
 
-int output_file(int fd, struct dbHeader_t *DBHDR){
+int output_file(int fd, struct dbheader_t *DBHDR){
 	
 	if(fd < 0){
 		printf("Invalid FD\n");
@@ -99,7 +99,7 @@ int output_file(int fd, struct dbHeader_t *DBHDR){
 	DBHDR->filesize = htonl(DBHDR->filesize);
 
 	lseek(fd, 0, SEEK_SET);
-	write(fd, DBHDR, sizeof(struct dbHeader_t));
+	write(fd, DBHDR, sizeof(struct dbheader_t));
 
 	return STATUS_SUCCESSFUL;
 
