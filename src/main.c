@@ -3,7 +3,7 @@
 #include <getopt.h>
 
 #include "parse.h"
-#include "files.h"
+#include "file.h"
 #include "common.h"
 
 void usage(){
@@ -21,7 +21,7 @@ int main(int argc, char *argv[]){
     int c;
 
     int DBFD = -1;
-    struct DBHeader_t *DBFDHR = NULL;
+    struct dbHeader_t *DBFDHR = NULL;
 
     while ((c = getopt(argc, argv, "nf:a:l")) != -1) {
             switch (c) {
@@ -53,7 +53,7 @@ int main(int argc, char *argv[]){
     }
 
     if(newFile){
-        DBFD = createFile(filepath);
+        DBFD = create_db_file(filepath);
         
         if(DBFD == STATUS_ERROR){
             printf("Unable to create DB file\n");

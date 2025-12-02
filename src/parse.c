@@ -11,6 +11,11 @@
 
 
 int create_db_header(int fd, struct dbHeader_t **headerOut){
+	if(fd < 0){
+		printf("File Descriptor");
+		return STATUS_ERROR;
+	}
+
 	struct dbHeader_t *header = calloc(1, sizeof(struct dbHeader_t));
 	
 	if(header == NULL){
@@ -77,7 +82,7 @@ int validate_db_header(int fd, struct dbHeader_t **headerOut){
 
 	*headerOut = header;
 
-	// return STATUS_SUCCESSFUL;
+	return STATUS_SUCCESSFUL;
 }
 
 int output_file(int fd, struct dbHeader_t *DBHDR){

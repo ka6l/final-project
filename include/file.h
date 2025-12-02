@@ -2,7 +2,7 @@
 #define FILES
 
 int openFile(char *filepath);
-int createFile(char *filepath);
+int create_db_file(char *filepath);
 
 
 

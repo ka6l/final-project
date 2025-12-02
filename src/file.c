@@ -19,7 +19,7 @@ int openFile(char *filepath){
     return fd;
 }
 
-int createFile(char *filepath){
+int create_db_file(char *filepath){
 
     int fd = open(filepath, O_RDONLY);
     
