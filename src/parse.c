@@ -11,7 +11,7 @@
 
 
 int create_db_header(int fd, struct dbHeader_t **headerOut){
-	if(fd < 0){
+	if(fd == NULL){
 		printf("File Descriptor");
 		return STATUS_ERROR;
 	}
@@ -54,7 +54,7 @@ int validate_db_header(int fd, struct dbHeader_t **headerOut){
 		return STATUS_ERROR;
 	}
 
-	header->version = ntohs(header->version);
+	header->version = 1;
 	header->count = ntohs(header->count);
 	header->magic = ntohl(header->magic);
 	header->filesize = ntohl(header->filesize);
@@ -93,10 +93,13 @@ int output_file(int fd, struct dbHeader_t *DBHDR){
 	}
 	// int realcount = DBHDR->count;
 
+	struct stat st;
+	fstat(fd, &st);
+
 	DBHDR->magic = htonl(DBHDR->magic);
 	DBHDR->version = htons(DBHDR->version);
 	DBHDR->count = htons(DBHDR->count);
-	DBHDR->filesize = htonl(DBHDR->filesize);
+	DBHDR->filesize = htonl(st.st_size);
 
 	lseek(fd, 0, SEEK_SET);
 	write(fd, DBHDR, sizeof(struct dbHeader_t));
