@@ -3,7 +3,6 @@
 
 #define HEADER_MAGIC 0x4c4c4144
 
-
 struct dbHeader_t{
 
 	unsigned int magic;

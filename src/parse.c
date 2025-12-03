@@ -91,7 +91,7 @@ int output_file(int fd, struct dbHeader_t *DBHDR){
 		printf("Invalid FD\n");
 		return STATUS_ERROR;
 	}
-	int realcount = DBHDR->count;
+	// int realcount = DBHDR->count;
 
 	DBHDR->magic = htonl(DBHDR->magic);
 	DBHDR->version = htons(DBHDR->version);
