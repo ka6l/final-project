@@ -21,7 +21,9 @@ int main(int argc, char *argv[]){
     int c;
 
     int DBFD = -1;
-    struct dbHeader_t *DBFDHR = NULL;
+    struct dbHeader_t
+    
+    *DBFDHR = NULL;
 
     while ((c = getopt(argc, argv, "nf:a:l")) != -1) {
             switch (c) {
