@@ -10,7 +10,7 @@
 #include "common.h"
 #include "parse.h"
 
-int output_file(int fd, struct dbheader_t *dbhdr, struct employee_t *employees) {
+int output_file(int fd, struct dbheader_t *dbhdr) {
 	if (fd < 0) {
 		printf("Got a bad FD from the user\n");
 		return STATUS_ERROR;
@@ -27,11 +27,11 @@ int output_file(int fd, struct dbheader_t *dbhdr, struct employee_t *employees) 
 
 	write(fd, dbhdr, sizeof(struct dbheader_t)); 
 
-	int i = 0;
-	for (; i < realcount; i++) {
-		employees[i].hours = htonl(employees[i].hours);
-		write(fd, &employees[i], sizeof(struct employee_t));
-	}
+	// int i = 0;
+	// for (; i < realcount; i++) {
+	// 	employees[i].hours = htonl(employees[i].hours);
+	// 	write(fd, &employees[i], sizeof(struct employee_t));
+	// }
 
 	return STATUS_SUCCESSFUL;
 
