@@ -1,92 +1,92 @@
-#include <stdio.h>
-#include <stdbool.h>
-#include <getopt.h>
+// #include <stdio.h>
+// #include <stdbool.h>
+// #include <getopt.h>
 
-#include "parse.h"
-#include "file.h"
-#include "common.h"
+// #include "parse.h"
+// #include "file.h"
+// #include "common.h"
 
-void usage(){
+// void usage(){
 
-    printf("-u usage | -f filepath | -n new file\n");
-}
+//     printf("-u usage | -f filepath | -n new file\n");
+// }
 
-int main(int argc, char *argv[]){
+// int main(int argc, char *argv[]){
 
-    char *portarg = NULL;
-    char *filepath = NULL;
+//     char *portarg = NULL;
+//     char *filepath = NULL;
 
-    bool newFile = false;
-    bool list = false;
-    int c;
+//     bool newFile = false;
+//     bool list = false;
+//     int c;
 
-    int DBFD = -1;
-    struct dbHeader_t
+//     int DBFD = -1;
+//     struct dbHeader_t
     
-    *DBFDHR = NULL;
+//     *DBFDHR = NULL;
 
-    while ((c = getopt(argc, argv, "nf:a:l")) != -1) {
-            switch (c) {
-                case 'n':
-                    newFile = true;
-                    break;
-                case 'f':
-                    filepath = optarg;
-                    break;
-                case 'p':
-                    portarg = optarg;
-                    break;
-                case 'l':
-                    list = true;
-                    break;
-                case '?':
-                    printf("Unknown option -%c\n", c);
-                    break;
-                default:
-                    return -1;
+//     while ((c = getopt(argc, argv, "nf:a:l")) != -1) {
+//             switch (c) {
+//                 case 'n':
+//                     newFile = true;
+//                     break;
+//                 case 'f':
+//                     filepath = optarg;
+//                     break;
+//                 case 'p':
+//                     portarg = optarg;
+//                     break;
+//                 case 'l':
+//                     list = true;
+//                     break;
+//                 case '?':
+//                     printf("Unknown option -%c\n", c);
+//                     break;
+//                 default:
+//                     return -1;
 
-            }
-        }
+//             }
+//         }
 
 
-    if(filepath == NULL){
-        printf("Enter filepath\n");
-        return -1;
-    }
+//     if(filepath == NULL){
+//         printf("Enter filepath\n");
+//         return -1;
+//     }
 
-    if(newFile){
-        DBFD = create_db_file(filepath);
+//     if(newFile){
+//         DBFD = create_db_file(filepath);
         
-        if(DBFD == STATUS_ERROR){
-            printf("Unable to create DB file\n");
-            return -1;
-        }
+//         if(DBFD == STATUS_ERROR){
+//             printf("Unable to create DB file\n");
+//             return -1;
+//         }
 
-        if(create_db_header(DBFD, &DBFDHR) == STATUS_ERROR){
-            printf("Error creating BD header\n");
-            return STATUS_ERROR;
-        }
+//         if(create_db_header(&DBFDHR) == STATUS_ERROR){
+//             printf("Error creating BD header\n");
+//             return STATUS_ERROR;
+//         }
         
-    }
+//     }
 
-    else{
-        DBFD = openFile(filepath);
+//     else{
+//         DBFD = openFile(filepath);
 
-        if(DBFD == -1){
-            printf("Error opening file\n");
-            return STATUS_ERROR;
-        }
+//         if(DBFD == -1){
+//             printf("Error opening file\n");
+//             return STATUS_ERROR;
+//         }
 
-        if(validate_db_header(DBFD, &DBFDHR) == STATUS_ERROR){
-            printf("Couldn't validate DB header\n");
-            return STATUS_ERROR;
-        }
+//         if(validate_db_header(DBFD, &DBFDHR) == STATUS_ERROR){
+//             printf("Couldn't validate DB header\n");
+//             return STATUS_ERROR;
+//         }
 
-    }
-
-
-    output_file(DBFD, &DBFDHR);
+//     }
 
 
-    return 0;
-}
+//     output_file(DBFD, &DBFDHR);
+
+
+//     return 0;
+// }
